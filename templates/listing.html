@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.title }} - MarketPlace{% endblock %}
+
+{% block content %}
+<div class="bg-slate-50 py-12 min-h-[70vh]">
+    <div class="container mx-auto px-4 max-w-6xl">
+
+        <!-- Breadcrumbs -->
+        <nav class="flex text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="hover:text-indigo-600 transition-colors">Home</a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <a href="/search?category={{ item.category }}"
+                            class="hover:text-indigo-600 transition-colors">{{ item.category }}</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-slate-400 line-clamp-1 w-32 sm:w-auto">{{ item.title }}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Left Column: Image and Description -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Main Image -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 aspect-video relative group">
+                    <img src="{{ item.image_url }}" alt="{{ item.title }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent pointer-events-none">
+                    </div>
+                </div>
+
+                <!-- Description Details -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Description</h2>
+                    <div class="prose prose-slate max-w-none text-slate-600 whitespace-pre-line leading-relaxed">
+                        {{ item.description }}
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-100 flex items-center text-sm text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Posted on {{ item.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Price and Contact -->
+            <div class="space-y-6">
+                <!-- Price Card -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 sticky top-24">
+                    <div
+                        class="inline-block bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4">
+                        {{ item.category }}
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight">{{ item.title }}
+                    </h1>
+
+                    <div class="flex items-center text-slate-600 mb-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-slate-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span class="font-medium">{{ item.location }}</span>
+                    </div>
+
+                    <div class="text-5xl font-black text-indigo-600 mb-8 tracking-tighter">
+                        ${{ "%.2f"|format(item.price) }}
+                    </div>
+
+                    <button
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-indigo-200 hover:shadow-xl hover:-translate-y-1 mb-4">
+                        Contact Seller
+                    </button>
+
+                    <button
+                        class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 py-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        Save for later
+                    </button>
+
+                    <!-- Hidden Contact Info (Revealed on click in a real app) -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                        <h3 class="font-bold text-slate-900">Seller Information</h3>
+                        <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">
+                                {{ item.contact_email[0]|upper }}
+                            </div>
+                            <div>
+                                <p class="font-medium text-slate-900">{{ item.contact_email.split('@')[0] }}</p>
+                                <p class="text-sm text-slate-500">Member since 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Tips -->
+                <div class="bg-amber-50 rounded-3xl p-6 border border-amber-100 text-amber-800 text-sm">
+                    <h4 class="font-bold mb-2 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Safety Tips
+                    </h4>
+                    <ul class="list-disc list-inside space-y-1 opacity-80 pl-2">
+                        <li>Meet in a public place.</li>
+                        <li>Check the item before you buy.</li>
+                        <li>Pay only after collecting the item.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

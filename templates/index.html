@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Home - MarketPlace{% endblock %}
+
+{% block content %}
+<section class="relative bg-indigo-50 py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/micro-mial.png')] opacity-30">
+    </div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-6">Find Anything, <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-500">Sell
+                Everything</span></h1>
+        <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">The modern marketplace for electronics, vehicles, real
+            estate, and more. Join thousands of users daily.</p>
+
+        <form action="/search" method="GET"
+            class="max-w-3xl mx-auto bg-white p-2 rounded-full shadow-lg flex items-center border border-slate-100 focus-within:ring-4 focus-within:ring-indigo-100 transition-all">
+            <div class="px-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <input type="text" name="q" placeholder="What are you looking for?"
+                class="w-full py-3 px-2 text-slate-700 outline-none bg-transparent placeholder-slate-400">
+            <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-medium transition-colors">Search</button>
+        </form>
+    </div>
+</section>
+
+<section class="py-16 container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-slate-900 mb-8">Categories</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for category in categories %}
+        <a href="/search?category={{ category }}"
+            class="group block p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+            <div
+                class="w-16 h-16 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+                <!-- Placeholder Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+            </div>
+            <h3 class="font-semibold text-slate-800">{{ category }}</h3>
+            <p class="text-sm text-slate-500 mt-1">Explore listings &rarr;</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="py-12 bg-slate-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900">Featured Listings</h2>
+                <p class="text-slate-500 mt-2">Discover the latest and most popular items.</p>
+            </div>
+            <a href="/search" class="text-indigo-600 font-medium hover:text-indigo-700 hidden sm:block">View all
+                &rarr;</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for item in listings %}
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full cursor-pointer"
+                onclick="window.location='/item/{{ item.id }}'">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="{{ item.image_url }}" alt="{{ item.title }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div
+                        class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold tracking-wider text-slate-800 shadow-sm uppercase">
+                        {{ item.category }}
+                    </div>
+                    <div
+                        class="absolute top-4 right-4 bg-indigo-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+                        ${{ "%.2f"|format(item.price) }}
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex items-center text-sm text-slate-500 mb-2 gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {{ item.location }}
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{{ item.title }}</h3>
+                    <p class="text-sm text-slate-600 line-clamp-2 mb-4">{{ item.description }}</p>
+
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400">Posted {{ item.created_at.strftime('%b %d, %Y') }}</span>
+                        <a href="/item/{{ item.id }}"
+                            class="text-sm text-indigo-600 font-medium hover:text-indigo-800 transition-colors">Details
+                            &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-8 text-center sm:hidden">
+            <a href="/search"
+                class="inline-block bg-white text-indigo-600 border border-indigo-200 font-medium px-6 py-3 rounded-full w-full">View
+                all listings</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

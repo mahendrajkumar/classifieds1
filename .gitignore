@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+classifieds.db
+classifieds.db.wal
+.env
+.DS_Store
+tailwindcss
