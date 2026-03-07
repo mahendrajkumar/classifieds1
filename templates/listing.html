@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}{{ item.title }} - MarketPlace{% endblock %}
+{% block meta_description %}{{ item.description[:150] }}{% if item.description|length > 150 %}...{% endif %}{% endblock
+%}
 
 {% block content %}
 <div class="bg-slate-50 py-12 min-h-[70vh]">
     <div class="container mx-auto px-4 max-w-6xl">
 
         <!-- Breadcrumbs -->
-        <nav class="flex text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
+        <nav data-aos="fade-down" class="flex text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
                     <a href="/" class="hover:text-indigo-600 transition-colors">Home</a>
@@ -42,7 +44,7 @@
             <!-- Left Column: Image and Description -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- Main Image -->
-                <div
+                <div data-aos="fade-up"
                     class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 aspect-video relative group">
                     <img src="{{ item.image_url }}" alt="{{ item.title }}"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -51,7 +53,8 @@
                 </div>
 
                 <!-- Description Details -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
                     <h2 class="text-2xl font-bold text-slate-900 mb-6">Description</h2>
                     <div class="prose prose-slate max-w-none text-slate-600 whitespace-pre-line leading-relaxed">
                         {{ item.description }}
@@ -71,7 +74,8 @@
             <!-- Right Column: Price and Contact -->
             <div class="space-y-6">
                 <!-- Price Card -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 sticky top-24">
+                <div data-aos="fade-left" data-aos-delay="200"
+                    class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 sticky top-24">
                     <div
                         class="inline-block bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4">
                         {{ item.category }}

@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}Home - MarketPlace{% endblock %}
+{% block meta_description %}The modern marketplace for electronics, vehicles, real estate, and more. Find anything, sell
+everything.{% endblock %}
 
 {% block content %}
 <section class="relative bg-indigo-50 py-20 overflow-hidden">
     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/micro-mial.png')] opacity-30">
     </div>
     <div class="container mx-auto px-4 relative z-10 text-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-6">Find Anything, <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-500">Sell
+        <h1 data-aos="fade-down" class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-6">Find
+            Anything, <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-500">Sell
                 Everything</span></h1>
-        <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">The modern marketplace for electronics, vehicles, real
+        <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">The modern
+            marketplace for electronics, vehicles, real
             estate, and more. Join thousands of users daily.</p>
 
-        <form action="/search" method="GET"
+        <form data-aos="zoom-in" data-aos-delay="200" action="/search" method="GET"
             class="max-w-3xl mx-auto bg-white p-2 rounded-full shadow-lg flex items-center border border-slate-100 focus-within:ring-4 focus-within:ring-indigo-100 transition-all">
             <div class="px-4 text-slate-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -31,10 +34,10 @@
 </section>
 
 <section class="py-16 container mx-auto px-4">
-    <h2 class="text-2xl font-bold text-slate-900 mb-8">Categories</h2>
+    <h2 data-aos="fade-right" class="text-2xl font-bold text-slate-900 mb-8">Categories</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for category in categories %}
-        <a href="/search?category={{ category }}"
+        <a href="/search?category={{ category }}" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}"
             class="group block p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
             <div
                 class="w-16 h-16 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
@@ -55,17 +58,19 @@
 <section class="py-12 bg-slate-50">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-end mb-8">
-            <div>
+            <div data-aos="fade-right">
                 <h2 class="text-3xl font-bold text-slate-900">Featured Listings</h2>
                 <p class="text-slate-500 mt-2">Discover the latest and most popular items.</p>
             </div>
-            <a href="/search" class="text-indigo-600 font-medium hover:text-indigo-700 hidden sm:block">View all
+            <a href="/search" data-aos="fade-left"
+                class="text-indigo-600 font-medium hover:text-indigo-700 hidden sm:block">View all
                 &rarr;</a>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for item in listings %}
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full cursor-pointer"
+            <div data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}"
+                class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full cursor-pointer"
                 onclick="window.location='/item/{{ item.id }}'">
                 <div class="relative h-48 overflow-hidden">
                     <img src="{{ item.image_url }}" alt="{{ item.title }}"

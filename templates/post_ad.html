@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}Post an Ad - MarketPlace{% endblock %}
+{% block meta_description %}Post a new classified ad on MarketPlace to reach thousands of buyers instantly.{% endblock
+%}
 
 {% block content %}
 <div class="bg-slate-50 py-12 min-h-[80vh]">
     <div class="container mx-auto px-4 max-w-3xl">
 
         <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">Post a new Ad</h1>
-            <p class="text-slate-500">Reach thousands of buyers in just a few clicks.</p>
+            <h1 data-aos="fade-down" class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">Post a new Ad</h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="text-slate-500">Reach thousands of buyers in just a few
+                clicks.</p>
         </div>
 
-        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 relative overflow-hidden">
+        <div data-aos="fade-up" data-aos-delay="200"
+            class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 relative overflow-hidden">
             <!-- Decorative background element -->
             <div
                 class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none">
