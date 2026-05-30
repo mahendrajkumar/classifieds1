@@ -1,0 +1,18 @@
+{
+    "workbench.editorAssociations": {
+        "*.parquet": "duckdb.dataFileViewer",
+        "*.csv": "duckdb.dataFileViewer",
+        "*.tsv": "duckdb.dataFileViewer",
+        "*.xlsx": "duckdb.dataFileViewer"
+    },
+    "duckdb.databases": [
+        {
+            "alias": "classifieds",
+            "type": "file",
+            "path": "/Users/mahendra/VSCode/classifieds1/classifieds.db",
+            "readOnly": true,
+            "attached": false
+        }
+    ],
+    "duckdb.defaultDatabase": "classifieds"
+}
